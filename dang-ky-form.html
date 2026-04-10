@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Góc Chia Sẻ | 12TN6</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="Anh/giadinh.jpg">
+</head>
+<body>
+    <header>
+        <h1>KỶ YẾU 12TN6</h1>
+        <p> Nơi lưu giữ những kỷ niệm đẹp nhất của "Tini6"</p>
+    </header>
+     <nav>
+          <a href="Main.html">Trang Chủ</a>
+          <a href="hoat-dong.html">Hoạt Động</a>
+          <a href="dang-ky-form.html" class="active">Góc Chia Sẻ</a>
+          <a href="https://www.facebook.com/DoanTruongTHPTGiaDinh?locale=vi_VN" target="_blank" class="external-link">
+            Fanpage Trường ↗
+        </a>
+     </nav>
+    
+            <section class="form-box guest-form">
+                <h2 class="form-title">💬 Góc Gửi Câu Hỏi (Khách)</h2>
+     <ol class="security-note" style="padding-left: 15px;">
+                <li>Hãy đặt câu hỏi cho chúng mình </li>
+                <li>Thông tin của bạn sẽ được bảo mật và gửi riêng đến hòm thư lớp.</li>
+     </ol>
+                
+               <form id="guestForm"> 
+                    <div class="input-group">
+                        <label>Bạn tên là gì?</label>
+                        <input type="text" id="guest_name" placeholder="Nhập tên hoặc biệt danh..." required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Bạn đến từ khối nào?</label>
+                        <select id="guest_grade">
+                            <option value="">-- Chọn khối lớp --</option>
+                            <option value="10">Khối 10</option>
+                            <option value="11">Khối 11</option>
+                            <option value="12">Khối 12</option>
+                            <option value="other">Cựu học sinh/Khác</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Câu hỏi của bạn dành cho 12TN6:</label>
+                        <textarea id="guest_question" rows="4" placeholder="Viết câu hỏi tại đây..."></textarea>
+                    </div>
+            <label> Hãy để lại thông tin để lớp phản hồi bạn nhé !! </label>       
+            <fieldset> 
+            <label>Email (email):</label>
+            <input type="email" id="guest_email">
+            <br><br>
+
+            <label>Số điện thoại (tel):</label>
+            <input type="tel" id="guest_phone">
+            <br><br>
+
+            <label>Website cá nhân (url):</label>
+            <input type="url" name="website" placeholder="https://...">
+            </fieldset>
+            <br></br>
+
+                    <button type="submit" class="btn-submit">Gửi câu hỏi</button>
+                    <button type="reset" class="btn-reset">Xóa form</button>
+                </form>
+            </section>
+
+         
+
+            <section class="form-box member-form">
+                <h2 class="form-title">❤️ Tâm Tình Nội Bộ (12TN6)</h2>
+                <p class="security-note">Chỉ thành viên trong lớp mới có thể xem những dòng này.</p>
+                
+                <form id="memberForm">
+                    <div class="input-group">
+                        <label>Tên thành viên:</label>
+                        <input type="text" id="member_name" placeholder="Tên của bạn..." required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Lời nhắn từ trái tim:</label>
+                        <textarea id="member_message" rows="5" placeholder="Những điều chưa dám nói..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit btn-red">Lưu giữ kỷ niệm</button>
+                        <button type="reset" class="btn-reset">Xóa form</button>
+                    </div>
+                </form>
+            </section>
+
+    <div class="creative-footer">
+        <p>✨ <i>"Mỗi dòng chữ gửi đi là một mảnh ký ức được lưu giữ mãi mãi."</i></p>
+    </div>
+    <footer> 
+    <p> Developed and coded by  
+        <span class="author-name"> Huy Đạt </span></p>
+        <div class="footer-bottom">
+        &copy; 2026 Made with ❤️ for 12TN6 | Deployed by XQ
+    </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+console.log("🔄 Script loaded, waiting for Supabase...");
+
+// Catch unhandled promise rejections từ extensions
+window.addEventListener('unhandledrejection', event => {
+    if (event.reason.message && event.reason.message.includes('A listener indicated')) {
+        console.warn("⚠️ Browser extension warning (safe to ignore):", event.reason);
+        event.preventDefault();
+    }
+});
+
+// Đợi Supabase library load xong
+function initSupabase() {
+    if (!window.supabase) {
+        console.warn("⏳ Supabase not loaded yet, retrying...");
+        setTimeout(initSupabase, 500);
+        return;
+    }
+
+    if (window.supabaseClient) {
+        console.log("⚠️ Supabase already initialized");
+        return;
+    }
+
+    const supabaseUrl = "https://bfcsscpngkmnjuzqpexz.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmY3NzY3BuZ2ttbmp1enFwZXh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MTc3MTMsImV4cCI6MjA5MTM5MzcxM30.RHTnOXbKrYI-E5YLhsmMOodchWvbhLr4zdwcAEZQ1gE";
+    
+    try {
+        window.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+        console.log("✅ Supabase initialized successfully!");
+        console.log("📍 URL:", supabaseUrl);
+        console.log("🔑 Key format:", supabaseKey.substring(0, 20) + "...");
+    } catch (err) {
+        console.error("❌ Failed to initialize Supabase:", err);
+    }
+}
+
+initSupabase();
+
+// Xử lý form khách (guest)
+document.getElementById("guestForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    console.log("📝 Guest form submitted");
+
+    // Debug: kiểm tra element tồn tại
+    const guestNameEl = document.getElementById("guest_name");
+    const guestGradeEl = document.getElementById("guest_grade");
+    const guestQuestionEl = document.getElementById("guest_question");
+    const guestEmailEl = document.getElementById("guest_email");
+    const guestPhoneEl = document.getElementById("guest_phone");
+
+    console.log("🔍 Elements found:", {
+        guestNameEl: !!guestNameEl,
+        guestGradeEl: !!guestGradeEl,
+        guestQuestionEl: !!guestQuestionEl,
+        guestEmailEl: !!guestEmailEl,
+        guestPhoneEl: !!guestPhoneEl
+    });
+
+    if (!guestNameEl || !guestGradeEl || !guestQuestionEl || !guestEmailEl || !guestPhoneEl) {
+        console.error("❌ Missing form elements!");
+        alert("❌ Lỗi: Một số trường form bị thiếu!");
+        return;
+    }
+
+    const name = guestNameEl.value?.trim() || "";
+    const grade = guestGradeEl.value || "";
+    const question = guestQuestionEl.value?.trim() || "";
+    const email = guestEmailEl.value?.trim() || "";
+    const phone = guestPhoneEl.value?.trim() || "";
+
+    console.log("📦 Guest data:", { name, grade, question, email, phone });
+
+    // Validation
+    if (!name) {
+        alert("❌ Vui lòng nhập tên");
+        return;
+    }
+
+    if (!window.supabaseClient) {
+        console.error("❌ Supabase client not initialized!");
+        alert("❌ Lỗi: Chưa kết nối Supabase!");
+        return;
+    }
+
+    try {
+        console.log("🚀 Sending to Supabase guest_questions table...");
+        const { data, error } = await window.supabaseClient
+            .from("guest_questions")
+            .insert([{ name, grade, question, email, phone }])
+            .select();
+
+        console.log("✅ API Response:", { data, error });
+
+        if (error) {
+            console.error("❌ Supabase Error:", error);
+            alert("❌ Lỗi gửi dữ liệu:\n" + (error.message || JSON.stringify(error)));
+        } else {
+            console.log("✅ Data inserted successfully!", data);
+            alert("✅ Gửi câu hỏi thành công!");
+            this.reset();
+        }
+    } catch (err) {
+        console.error("❌ Exception:", err);
+        alert("❌ Lỗi: " + err.message);
+    }
+});
+
+// Xử lý form nội bộ (member)
+document.getElementById("memberForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    console.log("📝 Member form submitted");
+
+    // Debug: kiểm tra element tồn tại
+    const memberNameEl = document.getElementById("member_name");
+    const memberMessageEl = document.getElementById("member_message");
+
+    console.log("🔍 Elements found:", {
+        memberNameEl: !!memberNameEl,
+        memberMessageEl: !!memberMessageEl
+    });
+
+    if (!memberNameEl || !memberMessageEl) {
+        console.error("❌ Missing form elements!");
+        alert("❌ Lỗi: Một số trường form bị thiếu!");
+        return;
+    }
+
+    const name = memberNameEl.value?.trim() || "";
+    const message = memberMessageEl.value?.trim() || "";
+
+    console.log("📦 Member data:", { name, message });
+
+    // Validation
+    if (!name) {
+        alert("❌ Vui lòng nhập tên");
+        return;
+    }
+
+    if (!window.supabaseClient) {
+        console.error("❌ Supabase client not initialized!");
+        alert("❌ Lỗi: Chưa kết nối Supabase!");
+        return;
+    }
+
+    try {
+        console.log("🚀 Sending to Supabase member_messages table...");
+        const { data, error } = await window.supabaseClient
+            .from("member_messages")
+            .insert([{ name, message }])
+            .select();
+
+        console.log("✅ API Response:", { data, error });
+
+        if (error) {
+            console.error("❌ Supabase Error:", error);
+            alert("❌ Lỗi gửi dữ liệu:\n" + (error.message || JSON.stringify(error)));
+        } else {
+            console.log("✅ Data inserted successfully!", data);
+            alert("✅ Lưu tâm tình thành công!");
+            this.reset();
+        }
+    } catch (err) {
+        console.error("❌ Exception:", err);
+        alert("❌ Lỗi: " + err.message);
+    }
+});
+</script>
+
+</body>
+</html>
